@@ -2,7 +2,7 @@
 
 PSQL="psql --username=freecodecamp --dbname=periodic_table -t --no-align -c"
 ATOMIC_FACTS=$($PSQL "select symbol,name,atomic_number from elements");
-ROW_COUNTER=11;#SHOULD BE TAKEN FROM DB.
+ROW_COUNTER=10;#SHOULD BE TAKEN FROM DB.
 UNMATCHED_COUNTER=0;
 if [[ -z $1 ]]
 then 
@@ -16,7 +16,8 @@ else
     ATOMIC_NUMBER=$NUMBER;
     ATOMIC_NAME=$($PSQL "select name from elements where atomic_number=$NUMBER");
     ATOMIC_SYMBOL=$SYMBOL;
-    ATOMIC_TYPE=$($PSQL "select type from properties where atomic_number=$NUMBER");
+    TYPE_ID=$($PSQL "select type_id from properties where atomic_number=$NUMBER");
+    ATOMIC_TYPE=$($PSQL "select type from types where type_id=$TYPE_ID");
     ATOMIC_MASS=$($PSQL "select atomic_mass from properties where atomic_number=$NUMBER");
     ATOMIC_MELTING_POINT=$($PSQL "select melting_point_celsius from properties where atomic_number=$NUMBER");
     ATOMIC_BOILING_POINT=$($PSQL "select boiling_point_celsius from properties where atomic_number=$NUMBER");
@@ -27,7 +28,8 @@ else
     ATOMIC_NUMBER=$NUMBER;
     ATOMIC_NAME=$NAME;
     ATOMIC_SYMBOL=$($PSQL "select symbol from elements where atomic_number=$NUMBER");
-    ATOMIC_TYPE=$($PSQL "select type from properties where atomic_number=$NUMBER");
+    TYPE_ID=$($PSQL "select type_id from properties where atomic_number=$NUMBER");
+    ATOMIC_TYPE=$($PSQL "select type from types where type_id=$TYPE_ID");
     ATOMIC_MASS=$($PSQL "select atomic_mass from properties where atomic_number=$NUMBER");
     ATOMIC_MELTING_POINT=$($PSQL "select melting_point_celsius from properties where atomic_number=$NUMBER");
     ATOMIC_BOILING_POINT=$($PSQL "select boiling_point_celsius from properties where atomic_number=$NUMBER");
@@ -37,7 +39,8 @@ else
      ATOMIC_NAME=$($PSQL "select name from elements where atomic_number=$NUMBER");
         ATOMIC_NUMBER=$NUMBER;
         ATOMIC_SYMBOL=$($PSQL "select symbol from elements where atomic_number=$NUMBER");
-        ATOMIC_TYPE=$($PSQL "select type from properties where atomic_number=$NUMBER");
+        TYPE_ID=$($PSQL "select type_id from properties where atomic_number=$NUMBER");
+        ATOMIC_TYPE=$($PSQL "select type from types where type_id=$TYPE_ID");
         ATOMIC_MASS=$($PSQL "select atomic_mass from properties where atomic_number=$NUMBER");
         ATOMIC_MELTING_POINT=$($PSQL "select melting_point_celsius from properties where atomic_number=$NUMBER");
         ATOMIC_BOILING_POINT=$($PSQL "select boiling_point_celsius from properties where atomic_number=$NUMBER");
