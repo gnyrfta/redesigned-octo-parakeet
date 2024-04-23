@@ -2,7 +2,7 @@
 
 PSQL="psql --username=freecodecamp --dbname=periodic_table -t --no-align -c"
 ATOMIC_FACTS=$($PSQL "select symbol,name,atomic_number from elements");
-ROW_COUNTER=10;#SHOULD BE TAKEN FROM DB.
+ROW_COUNTER=10;#SHOULD BE TAKEN FROM DB. Fix this.
 UNMATCHED_COUNTER=0;
 if [[ -z $1 ]]
 then 
